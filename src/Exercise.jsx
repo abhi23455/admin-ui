@@ -1,35 +1,19 @@
-import React from 'react'
-import UserCard from './UserCard';
+import React from "react";
+import PostCard from "./PostCard";
+import { posts } from "./data/posts";
 
 function Exercise() {
   return (
-    <>
-      <div className="min-h-screen bg-gray-100 p-6">
-        <h1 className="text-3xl font-bold text-center mb-6 text-blue-700">
-          User Cards
-        </h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <UserCard 
-                    name="Abhi"
-                    email="rammyt23@gmail.com"
-                    street="Jl. Pati-Tayu"
-                    city="Pati"
-                    />
-          <UserCard 
-                    name="Bagas"
-                    email="bagas23@gmail.com"
-                    street="Jl. Bagas"
-                    city="Salatiga"
-                    />
-          <UserCard 
-                    name="nafis"
-                    email="nafis23@gmail.com"
-                    street="Jl. Nafis"
-                    city="Semarang"
-                    />
-        </div>
-      </div>    
-    </>
+    <div className="min-h-screen bg-gray-100 p-8">
+      <h1 className="text-2xl font-bold text-center mb-8 text-red-500">
+        Post Cards
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {posts.map((post) => (
+          <PostCard key={post.id} {...post} />
+        ))}
+      </div>
+    </div>
   );
 }
 
