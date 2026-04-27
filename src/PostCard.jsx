@@ -8,29 +8,29 @@ const PostCard = ({ id, userId, title, body }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between p-6 bg-white rounded-lg shadow-md border border-transparent transition-all duration-300 hover:scale-105 hover:bg-pink-50 hover:border-pink-200 h-full">
+    <div className="group flex flex-col justify-between p-4 bg-white rounded-lg shadow-sm border-2 border-transparent transition-all duration-300 hover:scale-105 hover:bg-pink-100 hover:border-black hover:brightness-105 hover:shadow-md w-full aspect-square overflow-hidden">
       {/* Top: Title */}
-      <div className="mb-4 text-center">
-        <h2 className="text-lg font-bold text-gray-800 capitalize leading-tight">
+      <div className="text-center h-[30%] flex items-center justify-center">
+        <h2 className="text-sm md:text-base lg:text-lg font-bold text-[#1f2937] capitalize leading-tight line-clamp-2 px-1">
           {title}
         </h2>
       </div>
 
       {/* Middle: Body */}
-      <div className="flex-grow mb-6 text-center">
-        <p className="text-sm text-gray-600 leading-relaxed">
+      <div className="flex-grow flex items-center justify-center text-center px-1 my-1 overflow-hidden">
+        <p className="text-[11px] md:text-xs lg:text-sm text-[#4b5563] leading-snug line-clamp-5">
           {body}
         </p>
       </div>
 
       {/* Bottom: Button */}
-      <div className="mt-auto">
+      <div className="w-full mt-auto">
         <button
           onClick={handleClick}
           style={{
-            backgroundColor: isClicked ? "var(--color-special-red2)" : "#878787",
+            backgroundColor: isClicked ? "var(--color-special-red2)" : "#4b5563",
           }}
-          className="w-full py-2 px-4 rounded text-white font-medium transition-all duration-300 hover:brightness-125 cursor-pointer"
+          className="w-full py-2 px-1 rounded-md text-xs md:text-sm text-white font-bold transition-all duration-300 group-hover:brightness-110 cursor-pointer shadow-sm"
         >
           {isClicked ? "Tombol sudah diklik" : "Silakan Klik"}
         </button>
