@@ -16,3 +16,4 @@ export const getUsers = async () => {
         throw error;
     }
     };
+    
