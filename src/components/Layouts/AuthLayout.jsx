@@ -1,6 +1,5 @@
 import React from 'react'
 import Logo from '../Elements/Logo'
-import FormSignIn from '../Fragments/FormSignIn'
 
 function AuthLayout(props) {
     const { children } = props
@@ -10,7 +9,7 @@ function AuthLayout(props) {
             {/* container start */}
             <div className=" w-full max-w-sm">
                 <Logo />
-                <FormSignIn />
+                {children}
                 {/* form sign in start */}
             </div>
             {/* container end */}
