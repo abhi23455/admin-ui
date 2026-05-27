@@ -1,9 +1,11 @@
 import "./App.css";
-import Exercise from "./Exercise";
+import SignInPage from "./pages/signIn";
 
 function App() {
   return (
-    <Exercise />
+    <>
+      <SignInPage />
+    </>
   );
 }
 
