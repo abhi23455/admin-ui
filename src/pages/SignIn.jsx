@@ -2,7 +2,7 @@ import React from 'react'
 import AuthLayout from '../components/Layouts/AuthLayout'
 import FormSignIn from '../components/Fragments/FormSignIn'
 
-function signIn() {
+function SignIn() {
   return (
     <AuthLayout>
         <FormSignIn />
