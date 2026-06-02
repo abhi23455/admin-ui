@@ -6,7 +6,10 @@ function CardUpcomingBill(props) {
 
   return (
     <>
-      				desc={
+      <Card
+        title="Upcoming Bill"
+        link="/bill"
+       	desc={
           <div className="flex flex-col justify-around h-full">
 						{data.map((item) => (
 		          <div key={item.id} className="flex justify-between pt-3 pb-3">
@@ -31,7 +34,8 @@ function CardUpcomingBill(props) {
 		        ))}
 			    </div>
         }
-</>
+      />
+    </>
   );
 }
 
