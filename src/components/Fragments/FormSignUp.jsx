@@ -19,7 +19,7 @@ function FormSignUp() {
               label="Full Name"
               id="fullname"
               type="text"
-              placeholder="Fabian Adam Maheswara"
+              placeholder="Abhirama Maulana Putra"
               name="fullname"
             />
           </div>
