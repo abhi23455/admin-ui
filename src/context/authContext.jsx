@@ -3,11 +3,22 @@ import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
+// Fungsi untuk mengecek apakah token sudah expired
+const isTokenExpired = (token) => {
+  try {
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000; // Waktu saat ini dalam detik
+    return decoded.exp < currentTime;
+  } catch (err) {
+    return true;
+  }
+};
+
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
+    if (token && !isTokenExpired(token)) {
       try {
         return jwtDecode(token);
       } catch (err) {
@@ -15,6 +26,9 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.removeItem("token");
         return null;
       }
+    } else if (token) {
+      // Token expired, hapus dari localStorage
+      localStorage.removeItem("token");
     }
 
     return null;

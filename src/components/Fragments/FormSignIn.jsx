@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import LabeledInput from '../Elements/LabeledInput'
 import CheckBox from '../Elements/CheckBox'
 import Button from '../Elements/Button'
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { ThemeContext } from "../../context/themeContext";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Email tidak valid").required("Email wajib diisi"),
@@ -13,6 +14,7 @@ const SignInSchema = Yup.object().shape({
 });
 
 function FormSignIn({ onSubmit }) {
+  const { isDarkMode } = useContext(ThemeContext);
      
   return (
     <div>
@@ -85,6 +87,7 @@ function FormSignIn({ onSubmit }) {
                       type="checkbox"
                       checked={field.value}
                       label="Keep me signed in"
+                      labelColor={isDarkMode ? "text-gray-300" : ""}
                     />
                   )}
                 </Field>
@@ -98,9 +101,9 @@ function FormSignIn({ onSubmit }) {
         </div>
         {/* form end */}
         {/* teks start */}
-        <div className="my-9 px-7 flex flex-col justify-center items-center text-xs text-gray-03">
-          <div className="border border-gray-05 w-full"></div>
-          <div class="px-2 bg-special-mainBg absolute"> or sign in with</div>
+        <div className="my-9 px-7 flex flex-col justify-center items-center text-xs">
+          <div className={`border w-full ${isDarkMode ? 'border-gray-700' : 'border-gray-05'}`}></div>
+          <div className={`px-2 absolute ${isDarkMode ? 'bg-gray-900' : 'bg-special-mainBg'} ${isDarkMode ? 'text-gray-400' : 'text-gray-03'}`}> or sign in with</div>
         </div>
         {/* teks end */}
         {/* sign in with google start */}
@@ -137,12 +140,17 @@ function FormSignIn({ onSubmit }) {
         </div>
         {/* sign in with google end */}
         {/* link start */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-2">
           <Link to="/register" className="text-primary text-sm font-bold cursor-pointer">
             Create an account
           </Link>
         </div>
         {/* link end */}
+        {/* forgot password start */}
+        <div className={`text-center text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          Forgot Password
+        </div>
+        {/* forgot password end */}
     </div>
   )
 }

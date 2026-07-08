@@ -6,15 +6,17 @@ function Input(props) {
     icon = false,
     backgroundColor = false,
     border = "border-gray-03",
+    color = "text-gray-01",
     ...rest
   } = props;
 
   return (
     <>
       <input
-        className={`py-3 pl-4 text-sm rounded-md w-full border text-gray-01 
+        className={`py-3 pl-4 text-sm rounded-md w-full border 
           ${border} focus:border-black focus:outline-none focus:ring-0 
           ${backgroundColor || ""}
+          ${color}
         `}
         id={id}
         {...rest}

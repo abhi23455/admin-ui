@@ -6,13 +6,15 @@ import CardUpcomingBill from "../components/Fragments/CardUpcomingBill";
 import CardRecentTransaction from "../components/Fragments/CardRecentTransaction";
 import CardStatistics from "../components/Fragments/CardStatistics";
 import CardExpenseBreakdown from "../components/Fragments/CardExpenseBreakdown";
-import { transactions, bills, expensesBreakdowns, balances, goals, expensesStatistics } from "../data";
-import { goalService } from "../services/dataService";
+import { transactions, expensesBreakdowns, balances, expensesStatistics, goals as sampleGoals } from "../data.jsx";
+import { goalService, billService } from "../services/dataService";
 import { AuthContext } from "../context/authContext";
 import AppSnackbar from "../components/Elements/AppSnackbar";
 
 function dashboard() {
   	const [goals, setGoals] = useState({});
+    const [isLoadingGoals, setIsLoadingGoals] = useState(true);
+    const [bills, setBills] = useState(null); // Ubah initial state menjadi null
     const { logout } = useContext(AuthContext);
 
     const [snackbar, setSnackbar] = useState({
@@ -26,15 +28,28 @@ function dashboard() {
   };
 
   const fetchGoals = async () => {
+    setIsLoadingGoals(true);
     try {
       const data = await goalService();
       setGoals(data);
     } catch (err) {
-      setSnackbar({ 
-        open: true,
-        message: "Gagal mengambil data goals",
-        severity: "error",
-      });
+      console.error("Error fetching goals:", err);
+      setGoals(sampleGoals); // Set to sample data
+      if (err.status === 401) {
+        logout();
+      }
+    } finally {
+      setIsLoadingGoals(false);
+    }
+  };
+
+  const fetchBills = async () => {
+    try {
+      const data = await billService();
+      setBills(data);
+    } catch (err) {
+      console.error("Error fetching bills:", err);
+      setBills([]); // Set ke array kosong, CardUpcomingBill akan gunakan sample data
       if (err.status === 401) {
         logout();
       }
@@ -43,9 +58,11 @@ function dashboard() {
 
   useEffect(() => {
     fetchGoals();
+    fetchBills();
   }, []);
   
   console.log(goals);
+  console.log(bills);
   return (
     <>
        	<MainLayout>
@@ -54,7 +71,7 @@ function dashboard() {
             <CardBalance data={balances} />
           </div>
           <div className="sm:col-span-4">
-            <CardGoal data={goals} />
+            <CardGoal data={goals} isLoading={isLoadingGoals} />
           </div>
           <div className="sm:col-span-4">
             <CardUpcomingBill data={bills} />
