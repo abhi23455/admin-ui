@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../Elements/Card";
 import CircularProgress from '@mui/material/CircularProgress';
 import Icon from "../Elements/Icon";
+import { ThemeContext } from "../../context/themeContext";
 
 // Sample data untuk fallback
 const sampleData = [
@@ -30,6 +31,7 @@ const sampleData = [
 function CardUpcomingBill(props) {
   const { data } = props;
   const [isLoading, setIsLoading] = React.useState(true);
+  const { isDarkMode } = useContext(ThemeContext);
 
   React.useEffect(() => {
     if (data && data.length > 0) {
@@ -68,13 +70,13 @@ function CardUpcomingBill(props) {
 			              </div>
 			              <div className="ms-10">
 			                {item.icon}
-			                <span className="font-bold">{item.name}</span>
+			                <span className={`font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>{item.name}</span>
 			                <br />
-			                <span className="text-xs">Last Charge - {item.lastCharge}</span>
+			                <span className={`text-xs ${isDarkMode ? 'text-gray-300' : 'text-gray-01'}`}>Last Charge - {item.lastCharge}</span>
 			              </div>
 			            </div>
 			            <div className="flex items-center">
-			              <span className="py-2 px-4 border border-gray-05 rounded-lg font-bold">
+			              <span className={`py-2 px-4 border border-gray-05 rounded-lg font-bold ${isDarkMode ? 'text-white border-gray-600' : 'text-black'}`}>
 			                ${item.amount}
 			              </span>
 			            </div>

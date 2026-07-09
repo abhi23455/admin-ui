@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../Elements/Card";
 import Icon from "../Elements/Icon";
+import { ThemeContext } from "../../context/themeContext";
 
 function CardExpenseBreakdown(props) {
     const { data } = props;
+    const { isDarkMode } = useContext(ThemeContext);
     
     return (
         <>
@@ -20,11 +22,11 @@ function CardExpenseBreakdown(props) {
                     </div>
                   </div>
                   <div className="ms-4">
-                    <span className="text-gray-02">{item.category}</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-02'}>{item.category}</span>
                     <br />
-                    <span className="font-bold text-lg">${item.amount}</span>
+                    <span className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-black'}`}>${item.amount}</span>
                     <div className="flex">
-                      <span className="text-gray-02">{item.percentage}%*</span>{" "}
+                      <span className={isDarkMode ? 'text-gray-300' : 'text-gray-02'}>{item.percentage}%*</span>{" "}
                       {item.arrow}
                     </div>
                   </div>
